@@ -101,7 +101,7 @@ body {
 /* Show hamburger only on mobile */
 @media (max-width: 768px) {
     .hamburger {
-        display: flex;
+    display: flex;
         flex-direction: column;
         justify-content: center;
         width: 32px;
@@ -673,6 +673,10 @@ body {
 
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .contact-main {
+        padding-top: 90px !important;
     }
 }
 
