@@ -88,7 +88,7 @@ body {
     width: 100%;
 }
 
-/* Hide hamburger by default (desktop) */
+/* Hide hamburger by default */
 .hamburger {
     display: none;
 }
@@ -98,7 +98,7 @@ body {
     display: none;
 }
 
-/* Show hamburger and nav-close on mobile, style nav-menu for sliding */
+/* Show hamburger only on mobile */
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -148,17 +148,25 @@ body {
     }
 }
 
-/* Show nav-menu as horizontal bar on desktop */
 @media (min-width: 769px) {
+    .hamburger {
+        display: none !important;
+    }
     .nav-menu {
         position: static;
         flex-direction: row;
-        height: auto;
-        width: auto;
+        height: auto !important;
+        width: auto !important;
         background: none;
         box-shadow: none;
         align-items: center;
         padding: 0;
+        left: 0 !important;
+        top: 0 !important;
+    }
+    body {
+        overflow-y: auto !important;
+        height: auto !important;
     }
 }
 
