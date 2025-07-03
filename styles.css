@@ -88,18 +88,78 @@ body {
     width: 100%;
 }
 
+/* Hide hamburger by default (desktop) */
 .hamburger {
     display: none;
-    flex-direction: column;
-    cursor: pointer;
 }
 
-.bar {
-    width: 25px;
-    height: 3px;
-    background: #333;
-    margin: 3px 0;
-    transition: 0.3s;
+/* Hide nav-close (X) by default (desktop) */
+.nav-close {
+    display: none;
+}
+
+/* Show hamburger and nav-close on mobile, style nav-menu for sliding */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: 1rem;
+        z-index: 1001;
+    }
+    .hamburger span {
+        height: 3px;
+        width: 100%;
+        background: #2563eb;
+        margin: 4px 0;
+        border-radius: 2px;
+        display: block;
+        transition: 0.3s;
+    }
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 70vw;
+        max-width: 320px;
+        height: 100vh;
+        background: #f9f9f4;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem 1.5rem;
+        box-shadow: 2px 0 16px rgba(0,0,0,0.07);
+        transition: left 0.3s;
+        z-index: 1000;
+    }
+    .nav-menu.active {
+        left: 0;
+    }
+    .nav-close {
+        display: block;
+        font-size: 2rem;
+        color: #2563eb;
+        cursor: pointer;
+        margin-bottom: 2rem;
+        margin-left: auto;
+    }
+}
+
+/* Show nav-menu as horizontal bar on desktop */
+@media (min-width: 769px) {
+    .nav-menu {
+        position: static;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+        background: none;
+        box-shadow: none;
+        align-items: center;
+        padding: 0;
+    }
 }
 
 /* Hero Section */
