@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Shourya Dewansh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #landing-overlay {
+            background: #f9f9f4;
+        }
+    </style>
+</head>
+<body>
+    <div id="landing-overlay">
+        <canvas id="landing-canvas"></canvas>
+        <div class="landing-content">
+            <h1 class="landing-title">Hello, I'm Shourya Dewansh</h1>
+            <p class="landing-subtitle">Welcome to my portfolio</p>
+            <button id="enter-btn" class="btn btn-primary">Enter</button>
+        </div>
+    </div>
+    <script>
+    // Beautiful falling lines animation (blue/gray/white lines)
+    window.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('landing-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let w = window.innerWidth;
+            let h = window.innerHeight;
+            canvas.width = w;
+            canvas.height = h;
+
+            // Line config
+            const lineColors = ['#2563eb', '#4f8cff', '#b3d1ff', '#e0e7ef', '#fff'];
+            const lines = [];
+            const lineCount = Math.floor(w / 60) + 18;
+            for (let i = 0; i < lineCount; i++) {
+                lines.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    len: 60 + Math.random() * 80,
+                    speed: 2 + Math.random() * 2.5,
+                    color: lineColors[Math.floor(Math.random() * lineColors.length)],
+                    alpha: 0.18 + Math.random() * 0.32,
+                    width: 1.2 + Math.random() * 1.8
+                });
+            }
+
+            function drawLines() {
+                ctx.clearRect(0, 0, w, h);
+                for (let line of lines) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(line.x, line.y);
+                    ctx.lineTo(line.x, line.y + line.len);
+                    ctx.strokeStyle = line.color;
+                    ctx.globalAlpha = line.alpha;
+                    ctx.lineWidth = line.width;
+                    ctx.shadowColor = line.color;
+                    ctx.shadowBlur = 8;
+                    ctx.stroke();
+                    ctx.restore();
+                    line.y += line.speed;
+                    if (line.y > h + 10) {
+                        line.y = -line.len;
+                        line.x = Math.random() * w;
+                        line.color = lineColors[Math.floor(Math.random() * lineColors.length)];
+                        line.alpha = 0.18 + Math.random() * 0.32;
+                        line.width = 1.2 + Math.random() * 1.8;
+                    }
+                }
+                requestAnimationFrame(drawLines);
+            }
+            drawLines();
+
+            window.addEventListener('resize', () => {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w;
+                canvas.height = h;
+            });
+        }
+        // Enter button redirects to about.html
+        const enterBtn = document.getElementById('enter-btn');
+        if (enterBtn) {
+            enterBtn.addEventListener('click', () => {
+                window.location.href = 'about.html';
+            });
+        }
+    });
+    </script>
+</body>
+</html> 
